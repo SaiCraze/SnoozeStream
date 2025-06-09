@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnoozeStream - Tune In To Deeper Sleep</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles, Theme Colors, and Animations -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #111827;
+        }
+        
+        /* --- Enhanced Theme Colors --- */
+        .bg-brand-primary { background-color: #3971d1; }
+        .bg-brand-dark { background-color: #101e5e; }
+        .text-brand-primary { color: #3971d1; }
+        .text-brand-dark { color: #101e5e; }
+        .border-brand-primary { border-color: #3971d1; }
+        .ring-brand-primary { --tw-ring-color: #3971d1; }
+        .hover\:bg-brand-primary-hover:hover { background-color: #2f61b8; }
+        
+        .bg-gradient-deep-sky {
+             background-color: #101e5e;
+             background-image: radial-gradient(at 20% 90%, hsla(218,70%,35%,1) 0px, transparent 50%),
+                               radial-gradient(at 80% 10%, hsla(224, 76%, 21%, 1) 0px, transparent 50%);
+        }
+
+        /* --- Global Styles --- */
+        .scroll-smooth { scroll-behavior: smooth; }
+        .section-padding { padding-top: 5rem; padding-bottom: 5rem; }
+        @media (min-width: 768px) {
+            .section-padding { padding-top: 7rem; padding-bottom: 7rem; }
+        }
+
+        /* --- Hero Animation Styles --- */
+        #hero-section { height: 100vh; min-height: 700px; }
+        #hero-content { transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.8s ease; }
+        #hero-image-container { transition: opacity 1s ease 0.2s, transform 1s ease 0.2s; }
+        #hero-slideshow-image { transition: opacity 0.8s ease-in-out; }
+        
+        body.scrolled #hero-content { transform: translateX(0) !important; }
+        body.scrolled #hero-image-container { opacity: 1 !important; transform: translateX(0) !important; }
+
+        /* --- Color Showcase Styles --- */
+        .color-swatch {
+            transition: all 0.2s ease-in-out;
+            border: 2px solid transparent;
+        }
+        .color-swatch.active {
+            border-color: #3971d1; transform: scale(1.1); box-shadow: 0 0 0 2px white;
+        }
+        #pillow-image { transition: opacity 0.4s ease-in-out; }
+        
+        /* --- Shared Animation Styles --- */
+        @keyframes bootUp {
+            from { opacity: 0; transform: translateY(30px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .animate-on-scroll { opacity: 0; }
+        .in-view .animate-on-scroll { animation: bootUp 0.8s ease-out forwards; }
+        .in-view .animate-on-scroll.delay-1 { animation-delay: 200ms; }
+        .in-view .animate-on-scroll.delay-2 { animation-delay: 400ms; }
+
+        /* --- ✨ FIXED: Video Container Styles ✨ --- */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            width: 100%;
+        }
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body class="scroll-smooth">
+
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-xl sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-brand-dark tracking-tight">SnoozeStream</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#color-showcase" class="text-gray-600 hover:text-brand-primary transition-colors duration-300">Colors</a>
+                <a href="#app-features" class="text-gray-600 hover:text-brand-primary transition-colors duration-300">App</a>
+                <a href="#how-it-works" class="text-gray-600 hover:text-brand-primary transition-colors duration-300">How It Works</a>
+            </div>
+            <a href="#buy" class="bg-brand-primary text-white font-semibold px-5 py-2.5 rounded-lg hover:bg-brand-primary-hover transition-all transform hover:scale-105 shadow-md">
+                Get Early Access
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Dynamic Hero Section with Slideshow -->
+        <section id="hero-section" class="bg-gradient-deep-sky text-white relative overflow-hidden flex items-center">
+            <div class="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                <div id="hero-content" class="text-center md:text-left md:transform md:-translate-x-1/4">
+                    <h1 class="text-5xl md:text-7xl font-black leading-tight mb-4 tracking-tighter">Tune In To Deeper Sleep.</h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg mx-auto md:mx-0">SnoozeStream is the world's first smart pillow with adaptive sound technology, creating your personalized sleep sanctuary for uninterrupted, restorative rest.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                         <a href="#buy" class="bg-white text-brand-dark font-bold text-lg px-8 py-4 rounded-xl hover:bg-gray-200 transition-all shadow-lg transform hover:scale-105 inline-block">Get Early Access</a>
+                    </div>
+                </div>
+                <div id="hero-image-container" class="relative opacity-0 transform translate-x-12">
+                    <div class="absolute inset-0 bg-brand-primary/20 blur-3xl rounded-full"></div>
+                    <img id="hero-slideshow-image" src="https://i.ibb.co/KzwJsJXp/image.png" alt="SnoozeStream Smart Pillow" class="relative rounded-2xl w-full h-auto aspect-square object-cover shadow-2xl">
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Color Showcase -->
+        <section id="color-showcase" class="section-padding bg-gray-50">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Find Your Perfect Match</h2>
+                    <p class="text-gray-600 mt-3 max-w-xl mx-auto">Available in three serene colors to complement your style.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-4 rounded-3xl shadow-lg">
+                        <img id="pillow-image" src="https://i.ibb.co/KzwJsJXp/image.png" alt="SnoozeStream Smart Pillow" class="w-full h-auto rounded-2xl">
+                    </div>
+                    <div class="flex flex-col gap-6">
+                        <div>
+                            <h3 id="color-name" class="text-3xl font-bold text-brand-dark mb-2 transition-colors">Cloud Grey</h3>
+                            <p id="color-tagline" class="text-lg text-brand-primary font-medium italic">"Classic Calm, Smarter Sleep."</p>
+                            <p id="color-desc" class="text-gray-600 mt-4">A timeless, neutral grey that brings a sense of calm and sophistication to any bedroom.</p>
+                        </div>
+                        <div class="flex items-center gap-4 pt-6 border-t">
+                            <button class="color-swatch active w-16 h-16 rounded-full bg-gray-300" data-color="Cloud Grey" data-image="https://i.ibb.co/KzwJsJXp/image.png" data-tagline="Classic Calm, Smarter Sleep." data-desc="A timeless, neutral grey that brings a sense of calm and sophistication to any bedroom."></button>
+                            <button class="color-swatch w-16 h-16 rounded-full bg-blue-900" data-color="Midnight Blue" data-image="https://i.ibb.co/mC1RSm5p/c890ac8c-cb7b-4fd6-a1ed-4078ac3e236e.png" data-tagline="Deep Night Serenity." data-desc="A deep, rich blue reminiscent of the night sky, perfect for creating a tranquil and immersive sleep environment."></button>
+                            <button class="color-swatch w-16 h-16 rounded-full bg-teal-200" data-color="Mint Green" data-image="https://i.ibb.co/PZM74HBV/raw-se-2025-06-09-T19-06-52-Z-sp-r-sv-2024-08-04-sr-b-scid-64a62dc4-9711-5d62-9883-9fe3607243b9-skoi.png" data-tagline="Fresh Mint, Modern Serenity." data-desc="A light, refreshing green that adds a touch of modern serenity and a breath of fresh air to your space."></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Features Section -->
+        <section id="app-features" class="section-padding bg-white scroll-mt-20">
+            <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Your Personal Sleep Dashboard</h2>
+                    <p class="text-gray-600 mt-3 max-w-2xl mx-auto">The SnoozeStream app puts powerful insights and full control at your fingertips.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8 text-left">
+                    <div class="bg-gray-50/70 p-6 rounded-2xl animate-on-scroll"><img src="https://i.ibb.co/4nW92JN2/image.png" alt="App showing sleep quality report" class="rounded-xl w-full h-auto aspect-[4/3] object-cover mb-5 shadow-md"><h3 class="text-xl font-semibold text-brand-dark mb-2">Understand Your Sleep</h3><p class="text-gray-600">Receive detailed reports on your sleep stages, duration, and disturbances to understand your unique patterns.</p></div>
+                    <div class="bg-gray-50/70 p-6 rounded-2xl animate-on-scroll delay-1"><img src="https://i.ibb.co/ZpCcKqCk/image.png" alt="App showing mood logging" class="rounded-xl w-full h-auto aspect-[4/3] object-cover mb-5 shadow-md"><h3 class="text-xl font-semibold text-brand-dark mb-2">Track Your Mood</h3><p class="text-gray-600">Log your morning mood and energy levels to see the direct, positive impact of better sleep on your wellbeing.</p></div>
+                    <div class="bg-gray-50/70 p-6 rounded-2xl animate-on-scroll delay-2"><img src="https://i.ibb.co/7xGpC4V0/image.png" alt="App showing personalized soundscape controls" class="rounded-xl w-full h-auto aspect-[4/3] object-cover mb-5 shadow-md"><h3 class="text-xl font-semibold text-brand-dark mb-2">Control Your Soundscape</h3><p class="text-gray-600">Tap "Play" to start the adaptive AI, or choose from a library of calming sounds for a fully personalized experience.</p></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ✨ "How It Works" Section with Fixed Video ✨ -->
+        <section id="how-it-works" class="section-padding bg-gray-50">
+             <div class="container mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Effortless Path to Better Sleep</h2>
+                    <p class="text-gray-600 mt-3 max-w-xl mx-auto">See our smart pillow in action. It's as simple as resting your head.</p>
+                </div>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <!-- Left Column: Steps -->
+                    <div class="flex flex-col gap-8 animate-on-scroll">
+                        <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xl">01</div><div><h3 class="text-xl font-semibold text-brand-dark mb-1">Lay Down & Relax</h3><p class="text-gray-600 leading-relaxed">Simply rest your head on the SnoozeStream pillow. No buttons, no apps, no hassle.</p></div></div>
+                        <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xl">02</div><div><h3 class="text-xl font-semibold text-brand-dark mb-1">Sound Begins</h3><p class="text-gray-600 leading-relaxed">Gentle, calming white noise automatically begins to play, creating a tranquil environment.</p></div></div>
+                        <div class="flex items-start gap-4"><div class="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold text-xl">03</div><div><h3 class="text-xl font-semibold text-brand-dark mb-1">AI Adapts All Night</h3><p class="text-gray-600 leading-relaxed">Our smart sensors monitor your sleep and adjust the sound to ensure your rest is deep and uninterrupted.</p></div></div>
+                    </div>
+                    <!-- Right Column: Video -->
+                    <div class="animate-on-scroll delay-1">
+                        <!-- This container now uses the custom CSS to maintain aspect ratio -->
+                        <div class="video-container rounded-2xl shadow-2xl bg-gray-200">
+                             <iframe 
+                                src="https://drive.google.com/file/d/18KLynr7D2vlxHCqvHC_LmouBD5Eu75G1/preview" 
+                                allow="autoplay"
+                                class="border-0">
+                            </iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Animated Social Proof Section -->
+        <section id="social-proof" class="section-padding bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <p class="text-brand-primary font-semibold mb-2 animate-on-scroll">JOIN THE MOVEMENT</p>
+                <h2 id="customer-count" class="text-6xl md:text-8xl font-black text-brand-dark tracking-tighter animate-on-scroll delay-1" data-goal="65000000">0</h2>
+                <p class="text-xl md:text-2xl text-gray-600 mt-4 max-w-2xl mx-auto animate-on-scroll delay-2">customers excited for the pillow in North America Alone!</p>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section id="buy" class="section-padding bg-gradient-deep-sky">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl md:text-4xl font-bold text-white leading-snug max-w-2xl mx-auto">Ready for Uninterrupted Sleep?</h2>
+                 <p class="text-gray-300 mt-4 mb-8 text-lg max-w-xl mx-auto">SnoozeStream is launching soon. Join our waitlist for an exclusive launch-day discount.</p>
+                 <form class="max-w-md mx-auto">
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <input type="email" placeholder="Enter your email address" required class="w-full px-5 py-3 rounded-lg text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-primary ring-offset-2 ring-offset-brand-dark transition-shadow">
+                        <button type="submit" class="bg-white text-brand-dark font-bold px-8 py-3 rounded-lg hover:bg-gray-200 transition-all shadow-lg transform hover:scale-105">
+                            Join Waitlist
+                        </button>
+                    </div>
+                    <p class="text-gray-400 text-sm mt-4">We respect your privacy. No spam.</p>
+                 </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-12">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                 <div class="mb-6 md:mb-0"><p class="text-2xl font-bold tracking-tight">SnoozeStream</p><p class="mt-2 text-gray-400">© 2025 SnoozeStream Inc. All Rights Reserved.</p></div>
+                 <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.024.06 1.378.06 3.808s-.012 2.784-.06 3.808c-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.024.048-1.378.06-3.808.06s-2.784-.013-3.808-.06c-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.048-1.024-.06-1.378-.06-3.808s.012-2.784.06-3.808c.049-1.064.218-1.791-.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 016.08 2.525c.636-.247 1.363-.416 2.427-.465C9.53 2.013 9.884 2 12.315 2zM12 7.177a4.823 4.823 0 100 9.646 4.823 4.823 0 000-9.646zm0 7.94a3.117 3.117 0 110-6.234 3.117 3.117 0 010 6.234zM16.848 7.474a1.178 1.178 0 10-2.355 0 1.178 1.178 0 002.355 0z" clip-rule="evenodd"></path></svg></a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd"></path></svg></a>
+                 </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- SCRIPT FOR ALL INTERACTIVITY -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Hero Section Logic (Slideshow + Scroll Animation) ---
+            const heroText = document.getElementById('hero-content');
+            const heroSlideshowImage = document.getElementById('hero-slideshow-image');
+            let heroSlideshowInterval;
+
+            const heroImages = [
+                { src: 'https://i.ibb.co/4nW92JN2/image.png', alt: 'SnoozeStream App Interface' },
+                { src: 'https://i.ibb.co/twgYRkGL/image.png', alt: 'Person sleeping peacefully on the SnoozeStream pillow' },
+                { src: 'https://i.ibb.co/KzwJsJXp/image.png', alt: 'The SnoozeStream pillow in Cloud Grey' }
+            ];
+            let currentImageIndex = 0;
+
+            const startHeroSlideshow = () => {
+                heroSlideshowInterval = setInterval(() => {
+                    currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+                    heroSlideshowImage.style.opacity = 0;
+                    setTimeout(() => {
+                        heroSlideshowImage.src = heroImages[currentImageIndex].src;
+                        heroSlideshowImage.alt = heroImages[currentImageIndex].alt;
+                        heroSlideshowImage.style.opacity = 1;
+                    }, 800);
+                }, 3000); // Change image every 3 seconds
+            };
+
+            if (window.innerWidth >= 768) {
+                const heroTextWidth = heroText.offsetWidth;
+                const containerWidth = heroText.parentElement.offsetWidth;
+                const offset = (containerWidth / 2) - (heroTextWidth / 2);
+                heroText.style.transform = `translateX(${offset}px)`;
+            }
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    document.body.classList.add('scrolled');
+                    clearInterval(heroSlideshowInterval);
+                    if (heroSlideshowImage.src !== heroImages[2].src) {
+                        heroSlideshowImage.style.opacity = 0;
+                        setTimeout(() => {
+                            heroSlideshowImage.src = heroImages[2].src;
+                            heroSlideshowImage.alt = heroImages[2].alt;
+                            heroSlideshowImage.style.opacity = 1;
+                        }, 400);
+                    }
+                } else {
+                    document.body.classList.remove('scrolled');
+                }
+            });
+
+            startHeroSlideshow();
+
+
+            // --- Interactive Color Showcase Logic ---
+            const swatches = document.querySelectorAll('.color-swatch');
+            const pillowImage = document.getElementById('pillow-image');
+            const colorName = document.getElementById('color-name');
+            const colorTagline = document.getElementById('color-tagline');
+            const colorDesc = document.getElementById('color-desc');
+
+            swatches.forEach(swatch => {
+                swatch.addEventListener('click', () => {
+                    swatches.forEach(s => s.classList.remove('active'));
+                    swatch.classList.add('active');
+                    
+                    pillowImage.style.opacity = 0;
+                    setTimeout(() => {
+                        pillowImage.src = swatch.dataset.image;
+                        pillowImage.style.opacity = 1;
+                    }, 400);
+
+                    colorName.textContent = swatch.dataset.color;
+                    colorTagline.textContent = `"${swatch.dataset.tagline}"`;
+                    colorDesc.textContent = swatch.dataset.desc;
+                });
+            });
+
+
+            // --- General "Animate on Scroll" Logic ---
+            const animatedSections = document.querySelectorAll('.animate-on-scroll, #app-features, #social-proof, #how-it-works .grid');
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+            
+            animatedSections.forEach(el => sectionObserver.observe(el));
+
+            // --- Animated Count-Up for Social Proof ---
+            const countUpElement = document.getElementById('customer-count');
+            const countUpObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = +countUpElement.dataset.goal;
+                        let current = 0;
+                        const duration = 2000;
+                        const increment = target / (duration / 16);
+
+                        const updateCount = () => {
+                            current += increment;
+                            if (current < target) {
+                                countUpElement.innerText = Math.ceil(current).toLocaleString('en-US') + '+';
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                countUpElement.innerText = target.toLocaleString('en-US') + '+';
+                            }
+                        };
+                        requestAnimationFrame(updateCount);
+                        observer.unobserve(countUpElement);
+                    }
+                });
+            }, { threshold: 0.8 });
+            if (countUpElement) countUpObserver.observe(countUpElement);
+        });
+    </script>
+</body>
+</html>
